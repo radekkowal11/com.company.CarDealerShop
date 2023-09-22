@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import static src.org.launchcode.Config.fileLogin;
+import static src.org.launchcode.SelectionPanel.Login;
 
 public class CheckPassword {
+
+
 
     public static void checkPasword(String a, String b) {
 
@@ -21,8 +24,9 @@ public class CheckPassword {
                 structurFileLoginList.add(new StructurFileLogin(LoginScanner.next(), LoginScanner.next()));
             }
             for (StructurFileLogin structure : structurFileLoginList){
-                if (a.equals(structure.getName())){
+                if (a.equals(structure.getNick())){
                     if (b.equals(structure.getPassword())){
+                        Login = a;
                         SelectionPanel.Panel();
                     }
                 }

@@ -1,25 +1,31 @@
 package src.org.launchcode;
 
 public class Car {
+
+    private int id;
     private String brand;
     private String model;
     private int yearProduction;
     private double price;
 
-    Person person ;
-
-    public Car() {
-
-    }
-
     public Car(String brand, String model, int yearProduction, double price) {
-        person.getId();
         this.brand = brand;
         this.model = model;
         this.yearProduction = yearProduction;
         this.price = price;
     }
 
+    public Car(int id, String brand, String model, int yearProduction, double price) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.yearProduction = yearProduction;
+        this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
     public String getBrand() {
         return brand;
     }
@@ -39,7 +45,6 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                "id='" + person.getId() + '\'' +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", yearProduction=" + yearProduction +
