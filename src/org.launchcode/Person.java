@@ -1,24 +1,10 @@
 package src.org.launchcode;
 
 public class Person {
-    private int id;
-    public static int nextId = 0;
-
-    private String name;
-    private int age;
-    private String localization;
-
-    public Person() {
-    }
-
-    public Person(String name, int age, String localization) {
-        id = nextId;
-        this.name = name;
-        this.age = age;
-        this.localization = localization;
-        nextId++;
-
-    }
+    private final int id;
+    private final String name;
+    private final int age;
+    private final String localization;
 
     public Person(int id, String name, int age, String localization) {
         this.id = id;
@@ -26,11 +12,6 @@ public class Person {
         this.age = age;
         this.localization = localization;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
     }

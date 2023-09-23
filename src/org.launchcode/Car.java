@@ -1,20 +1,13 @@
 package src.org.launchcode;
 
-public class Car {
+import java.util.Comparator;
 
-    private int id;
-    private String brand;
-    private String model;
-    private int yearProduction;
-    private double price;
-
-    public Car(String brand, String model, int yearProduction, double price) {
-        this.brand = brand;
-        this.model = model;
-        this.yearProduction = yearProduction;
-        this.price = price;
-    }
-
+public class Car implements Comparator<Car> {
+    private final int id;
+    private final String brand;
+    private final String model;
+    private final int yearProduction;
+    private final double price;
     public Car(int id, String brand, String model, int yearProduction, double price) {
         this.id = id;
         this.brand = brand;
@@ -44,11 +37,12 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", yearProduction=" + yearProduction +
-                ", price=" + price +
-                '}';
+        return
+                "brand =" + brand + ", model=" + model  + ", yearProduction=" + yearProduction + ", price=" + price;
+    }
+
+    @Override
+    public int compare(Car car1, Car car2) {
+        return Double.compare(car1.getPrice(), car2.getPrice());
     }
 }
