@@ -1,21 +1,53 @@
 package src.org.launchcode;
-import static src.org.launchcode.Config.SEPARATOR;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import static src.org.launchcode.Config.fileCars;
+import static src.org.launchcode.SelectionPanel.*;
+
 public class Offer {
-
-    public static Car fromCsvString(String csvString) {
-        String[] tab = csvString.split(SEPARATOR);
-
-        int id = Integer.parseInt(tab[0]);
-        String brand = tab[1];
-        String model = tab[2];
-        int year = Integer.parseInt(tab[3]);
-        double price = Double.parseDouble(tab[4]);
-
-        return new Car(id,brand,model,year, price);
+    public static void findCars() {
+        getCarsCsv();
+        for (Car car : cars) {
+            System.out.println(car);
+        }
     }
-    public static String addCarsCsv(Car car) {
+    public static void findBrand(String brand) {
+        getCarsCsv();
+        for (Car car : cars) {
+            if (car.getBrand().equals(brand)) {
+                System.out.println(car);
+            }
+        }
+    }
 
-        return car.getId() + SEPARATOR + car.getBrand() + SEPARATOR + car.getModel() + SEPARATOR + car.getYearProduction() + SEPARATOR + car.getPrice();
+    public static void sortByPrice(){
+        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
+            cars.clear();
+            while (carsScanner.hasNext()) {
+                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                cars.add(newCar);
+                cars.sort(newCar);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        for (Car car : cars) {
+            System.out.println(car);
+        }
+    }
+
+    private static void getCarsCsv() {
+        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
+            cars.clear();
+            while (carsScanner.hasNext()) {
+                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                cars.add(newCar);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
