@@ -4,7 +4,8 @@ import java.util.Comparator;
 
 import static src.org.launchcode.Config.SEPARATOR;
 
-public class Car implements Comparator<Car> {
+public class Car implements Comparator<Car>,Comparable<Car> {
+    private static int nextIdMap = 0;
     private final int id;
     private final String brand;
     private final String model;
@@ -18,6 +19,11 @@ public class Car implements Comparator<Car> {
         this.price = price;
     }
 
+    public int getIdMap() {
+        nextIdMap++;
+        int idMap = nextIdMap;
+        return idMap;
+    }
     public int getId() {
         return id;
     }
@@ -56,11 +62,16 @@ public class Car implements Comparator<Car> {
     @Override
     public String toString() {
         return
-                "brand =" + brand + ", model=" + model  + ", yearProduction=" + yearProduction + ", price=" + price;
+                "brand: " + brand + ", model: " + model  + ", yearProduction: " + yearProduction + ", price: " + price;
     }
 
     @Override
     public int compare(Car car1, Car car2) {
         return Double.compare(car1.getPrice(), car2.getPrice());
+    }
+
+    @Override
+    public int compareTo(Car car) {
+        return Integer.compare(this.yearProduction, car.yearProduction);
     }
 }

@@ -43,8 +43,12 @@ public class SelectionPanel {
             System.out.println("1. Dodawanie samochodu");
             System.out.println("2.Usuwanie samochodu");
             System.out.println("3.Wyszukaj samochód");
+            System.out.println("4.Wyloguj się");
 
             int number = scanner.nextInt();
+            if (number == 0)
+                break;
+
             switch (number) {
                 case 1 -> addCars();
                 case 2 -> deleteCar();
@@ -53,6 +57,8 @@ public class SelectionPanel {
                     System.out.println("1.Pokaż wszystkie samochody");
                     System.out.println("2.Wybierz marke samochodu");
                     System.out.println("3.Posortu rosnąco po cenie");
+                    System.out.println("4.Posortu od najstarszych");
+                    System.out.println("5.W formie mapy");
                     int n = scanner.nextInt();
                     switch (n) {
                         case 1:
@@ -78,10 +84,38 @@ public class SelectionPanel {
                             if (e == 1) {
                                 break;
                             }
+                        case 4:
+                            sortByYearProduction();
+                            System.out.println("1.Wyjście do strony głównej");
+                            e = scanner.nextInt();
+                            if (e == 1) {
+                                break;
+                            }
+                        case 5:
+                            MapCars();
+                            System.out.println("2.Pokaz właścicela");
+                            System.out.println("1.Wyjście do strony głównej");
+                            e = scanner.nextInt();
+                            if (e == 1) {
+                                break;
+                            }
+                            if (e == 2) {
+                                System.out.print("Podaj numer id samochodu: ");
+                                n = scanner.nextInt();
+                                getOwner(n);
+                                System.out.println("1.Wyjście do strony głównej");
+                                e = scanner.nextInt();
+                                if (e == 1) {
+                                    break;
+                                }
+                            }
                     }
+
                 }
+                case 4 -> log();
             }
         }
-
     }
+
 }
+

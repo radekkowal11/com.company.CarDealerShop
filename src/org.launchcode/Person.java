@@ -29,11 +29,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + getId()+
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", localization='" + localization + '\'' +
-                '}';
+        return "id: " + getId()+ ", name: " + name + ", age: " + age +
+                ", localization: " + localization;
     }
 }
