@@ -2,7 +2,7 @@ package src.org.launchcode;
 
 import java.util.Comparator;
 
-import static src.org.launchcode.Config.SEPARATOR;
+import static src.org.launchcode.Constance.SEPARATOR;
 
 public class Car implements Comparator<Car>,Comparable<Car> {
     private static int nextIdMap = 0;
@@ -21,8 +21,7 @@ public class Car implements Comparator<Car>,Comparable<Car> {
 
     public int getIdMap() {
         nextIdMap++;
-        int idMap = nextIdMap;
-        return idMap;
+        return nextIdMap;
     }
     public int getId() {
         return id;
@@ -43,7 +42,7 @@ public class Car implements Comparator<Car>,Comparable<Car> {
         return price;
     }
 
-    public static Car fromCsvString(String csvString) {
+    public static Car getCarFromCsv(String csvString) {
         String[] tab = csvString.split(SEPARATOR);
 
         int id = Integer.parseInt(tab[0]);
@@ -54,7 +53,7 @@ public class Car implements Comparator<Car>,Comparable<Car> {
 
         return new Car(id,brand,model,year, price);
     }
-    public static String addCarsCsv(Car car) {
+    public static String getCarAsCsvString(Car car) {
 
         return car.getId() + SEPARATOR + car.getBrand() + SEPARATOR + car.getModel() + SEPARATOR + car.getYearProduction() + SEPARATOR + car.getPrice();
     }

@@ -17,7 +17,7 @@ public class StructFileLogin {
     }
 
     public String addStructureCsv() {
-        return getNick() +" "+ getPassword();
+        return getNick() + Constance.SEPARATOR + getPassword();
 
     }
 }

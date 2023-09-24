@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import static src.org.launchcode.Config.fileLogin;
-import static src.org.launchcode.SelectionPanel.Login;
+import static src.org.launchcode.Constance.*;
+
 
 public class CheckPassword {
     public static void checkPassword(String a, String b) {

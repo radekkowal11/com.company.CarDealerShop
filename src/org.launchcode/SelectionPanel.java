@@ -1,23 +1,17 @@
 package src.org.launchcode;
 
-import java.util.*;
-
 import static src.org.launchcode.Offer.*;
-import static src.org.launchcode.Transaction.*;
+import static src.org.launchcode.TransactionPanel.*;
+import static src.org.launchcode.Constance.*;
 
 public class SelectionPanel {
-    public static int newId;
-    public static String Login;
-    public static int userId;
-    public static Scanner scanner = new Scanner(System.in);
-    public static List<Car> cars = new ArrayList<>();
 
     public static void log() {
         System.out.println("Wybierz jedną z opcji");
         System.out.println("1.Logowanie");
         System.out.println("2.Dodaj użytkownika");
-        int liczba = scanner.nextInt();
-        switch (liczba) {
+        int number = scanner.nextInt();
+        switch (number) {
             case 1 -> {
                 System.out.println("LOGOWANIE");
                 System.out.print("User: ");

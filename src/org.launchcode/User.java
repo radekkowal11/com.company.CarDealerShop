@@ -1,6 +1,6 @@
 package src.org.launchcode;
 
-import static src.org.launchcode.Config.*;
+import static src.org.launchcode.Constance.*;
 public class User extends Person {
     private final String nick;
     private final String password;

@@ -3,10 +3,7 @@ package src.org.launchcode;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
-
-import static src.org.launchcode.Config.fileCars;
-import static src.org.launchcode.Config.fileUsers;
-import static src.org.launchcode.SelectionPanel.*;
+import static src.org.launchcode.Constance.*;
 
 public class Offer {
     static Map<Integer, Car> carsMap = new HashMap<>();
@@ -31,7 +28,7 @@ public class Offer {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
             while (carsScanner.hasNext()) {
-                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
                 cars.sort(newCar);
             }
@@ -47,7 +44,7 @@ public class Offer {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
             while (carsScanner.hasNext()) {
-                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
                 Collections.sort(cars);
 
@@ -64,7 +61,7 @@ public class Offer {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
             while (carsScanner.hasNext()) {
-                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
             }
         } catch (FileNotFoundException e) {
@@ -76,7 +73,7 @@ public class Offer {
 
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             while (carsScanner.hasNext()) {
-                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 carsMap.put(newCar.getIdMap(), newCar);
             }
         } catch (FileNotFoundException e) {

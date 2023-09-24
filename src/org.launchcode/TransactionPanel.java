@@ -6,11 +6,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import static src.org.launchcode.Constance.*;
 
-import static src.org.launchcode.Config.*;
-import static src.org.launchcode.SelectionPanel.*;
 
-public class Transaction {
+public class TransactionPanel {
     public static void addUser() {
         try (Scanner usersScanner = new Scanner(new FileInputStream(fileUsers))) {
             List<StructFileLogin> structFileLogin = new ArrayList<>();
@@ -69,7 +68,7 @@ public class Transaction {
         takeId();
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             while (carsScanner.hasNext()) {
-                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
             }
 
@@ -91,7 +90,7 @@ public class Transaction {
         }
 
         try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
-            cars.forEach(car -> carsPrintWrtiter.println(Car.addCarsCsv(car)));
+            cars.forEach(car -> carsPrintWrtiter.println(Car.getCarAsCsvString(car)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -102,7 +101,7 @@ public class Transaction {
         takeId();
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             while (carsScanner.hasNext()) {
-                Car newCar = Car.fromCsvString(carsScanner.nextLine());
+                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 if (userId != newCar.getId()) {
                     deleteCar.add(newCar);
                 }
@@ -112,7 +111,7 @@ public class Transaction {
             throw new RuntimeException(e);
         }
         try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
-            deleteCar.forEach(car -> carsPrintWrtiter.println(Car.addCarsCsv(car)));
+            deleteCar.forEach(car -> carsPrintWrtiter.println(Car.getCarAsCsvString(car)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
