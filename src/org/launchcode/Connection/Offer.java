@@ -1,12 +1,17 @@
-package src.org.launchcode;
+package src.org.launchcode.Connection;
+
+import src.org.launchcode.Object.Car;
+import src.org.launchcode.Object.User;
+import src.org.launchcode.Object.StructLabel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
-import static src.org.launchcode.Constance.*;
+import static src.org.launchcode.Interface.Constance.*;
 
 public class Offer {
     static Map<Integer, Car> carsMap = new HashMap<>();
+    static StructLabel structLabel;
 
     public static void findCars() {
         getCarsCsv();
@@ -27,6 +32,7 @@ public class Offer {
     public static void sortByPrice() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
+            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
                 Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
@@ -43,6 +49,7 @@ public class Offer {
     public static void sortByYearProduction() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
+            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
                 Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
@@ -60,6 +67,7 @@ public class Offer {
     private static void getCarsCsv() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
+            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
                 Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
@@ -70,8 +78,8 @@ public class Offer {
     }
 
     public static void MapCars() {
-
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
+            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
                 Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
                 carsMap.put(newCar.getIdMap(), newCar);
@@ -96,9 +104,10 @@ public class Offer {
 
         try (Scanner usersScanner = new Scanner(new FileInputStream(fileUsers))) {
             int plus = 0;
+            structLabel = StructLabel.getUserLabelFromCsv(usersScanner.nextLine());
             while (usersScanner.hasNext()) {
                 plus++;
-                User newUser = User.fromCsvString(usersScanner.nextLine());
+                User newUser = User.convertUserCsvToString(usersScanner.nextLine());
                 newId = newUser.getId() + plus;
                 if (p[0] == newUser.getId()) {
                     System.out.println(newUser);

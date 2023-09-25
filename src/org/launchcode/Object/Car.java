@@ -1,8 +1,8 @@
-package src.org.launchcode;
+package src.org.launchcode.Object;
 
 import java.util.Comparator;
 
-import static src.org.launchcode.Constance.SEPARATOR;
+import static src.org.launchcode.Interface.Constance.SEPARATOR;
 
 public class Car implements Comparator<Car>,Comparable<Car> {
     private static int nextIdMap = 0;
@@ -11,17 +11,31 @@ public class Car implements Comparator<Car>,Comparable<Car> {
     private final String model;
     private final int yearProduction;
     private final double price;
+    public boolean isDeleted = false;
     public Car(int id, String brand, String model, int yearProduction, double price) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.yearProduction = yearProduction;
         this.price = price;
+        //isDeleted = false;
+    }
+
+    public Car(int id, String brand, String model, int yearProduction, double price, boolean isDeleted) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.yearProduction = yearProduction;
+        this.price = price;
+        this.isDeleted = isDeleted;
     }
 
     public int getIdMap() {
         nextIdMap++;
         return nextIdMap;
+    }
+    public int setIdMap(int a) {
+        return a;
     }
     public int getId() {
         return id;
@@ -42,6 +56,14 @@ public class Car implements Comparator<Car>,Comparable<Car> {
         return price;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public static Car getCarFromCsv(String csvString) {
         String[] tab = csvString.split(SEPARATOR);
 
@@ -50,12 +72,14 @@ public class Car implements Comparator<Car>,Comparable<Car> {
         String model = tab[2];
         int year = Integer.parseInt(tab[3]);
         double price = Double.parseDouble(tab[4]);
+        boolean isDeleted = Boolean.parseBoolean(tab[5]);
 
-        return new Car(id,brand,model,year, price);
+        return new Car(id,brand,model,year, price, isDeleted);
     }
+
     public static String getCarAsCsvString(Car car) {
 
-        return car.getId() + SEPARATOR + car.getBrand() + SEPARATOR + car.getModel() + SEPARATOR + car.getYearProduction() + SEPARATOR + car.getPrice();
+        return car.getId() + SEPARATOR + car.getBrand() + SEPARATOR + car.getModel() + SEPARATOR + car.getYearProduction() + SEPARATOR + car.getPrice() + SEPARATOR + car.isDeleted();
     }
 
     @Override

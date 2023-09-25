@@ -1,11 +1,10 @@
-package src.org.launchcode;
+package src.org.launchcode.Interface;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import src.org.launchcode.Object.Car;
+
+import java.util.*;
 
 public class Constance {
-    public static String fileLogin = "csv\\login.csv";
     public static String fileUsers = "csv\\users.csv";
     public static String fileCars = "csv\\cars.csv";
 
@@ -16,5 +15,6 @@ public class Constance {
     public static int userId;
     public static Scanner scanner = new Scanner(System.in);
     public static List<Car> cars = new ArrayList<>();
+    public static Map<Integer,Car> deleteCar = new HashMap();
 
 }

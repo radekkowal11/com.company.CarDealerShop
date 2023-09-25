@@ -1,8 +1,10 @@
-package src.org.launchcode;
+package src.org.launchcode.Interface;
 
-import static src.org.launchcode.Offer.*;
-import static src.org.launchcode.TransactionPanel.*;
-import static src.org.launchcode.Constance.*;
+import src.org.launchcode.Connection.CheckPassword;
+
+import static src.org.launchcode.Connection.ConnectionWithCsv.*;
+import static src.org.launchcode.Connection.Offer.*;
+import static src.org.launchcode.Interface.Constance.*;
 
 public class SelectionPanel {
 
