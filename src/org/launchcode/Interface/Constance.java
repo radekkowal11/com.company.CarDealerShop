@@ -15,6 +15,7 @@ public class Constance {
     public static int userId;
     public static Scanner scanner = new Scanner(System.in);
     public static List<Car> cars = new ArrayList<>();
-    public static Map<Integer,Car> deleteCar = new HashMap();
+    public static Map<Integer,Car> deleteCar = new HashMap<>();
+    public static int nextIdMap = 0;
 
 }

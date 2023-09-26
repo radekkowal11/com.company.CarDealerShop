@@ -19,9 +19,9 @@ public class ConnectionWithCsv {
         StructLabel structLabel;
         try (Scanner usersScanner = new Scanner(new FileInputStream(fileUsers))) {
             List<User> users = new ArrayList<>();
-            structLabel = StructLabel.getUserLabelFromCsv(usersScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getUserLabelFromCsv(usersScanner.nextLine());
             while (usersScanner.hasNext()) {
-                User newUser = User.convertUserCsvToString(usersScanner.nextLine());
+                User newUser = StructConversionObjectandCsv.convertUserCsvToString(usersScanner.nextLine());
                 newId = newUser.getId() + 1;
                 users.add(newUser);
             }
@@ -43,8 +43,8 @@ public class ConnectionWithCsv {
 
     private static void writeUsers(List<User> users, StructLabel structLabel) {
         try (PrintWriter usersPrintWrtiter = new PrintWriter(fileUsers)) {
-            usersPrintWrtiter.println(StructLabel.getUserLabelAsCsvString(structLabel));
-            users.forEach(u -> usersPrintWrtiter.println(u.addUserStringToCsv()));
+            usersPrintWrtiter.println(StructConversionObjectandCsv.getUserLabelAsCsvString(structLabel));
+            users.forEach(u -> usersPrintWrtiter.println(StructConversionObjectandCsv.addUserStringToCsv(u)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -54,9 +54,9 @@ public class ConnectionWithCsv {
         takeId();
         StructLabel structLabel;
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
-                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
+                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
             }
 
@@ -73,8 +73,8 @@ public class ConnectionWithCsv {
         }
 
         try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
-            carsPrintWrtiter.println(StructLabel.getCarLabelAsCsvString(structLabel));
-            cars.forEach(car -> carsPrintWrtiter.println(Car.getCarAsCsvString(car)));
+            carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
+            cars.forEach(car -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(car)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -88,9 +88,9 @@ public class ConnectionWithCsv {
 
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             Car newCar ;
-            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
-                    newCar = Car.getCarFromCsv(carsScanner.nextLine());
+                    newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                     deleteCar.put(newCar.getIdMap(), newCar);
 
             }
@@ -98,7 +98,7 @@ public class ConnectionWithCsv {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-            ;
+
         System.out.println("Twoje samochody");
         deleteCar.forEach((key,value) ->{
 
@@ -111,7 +111,6 @@ public class ConnectionWithCsv {
         int numbers = scanner.nextInt();
 
         deleteCar.forEach((k,v) ->{
-            System.out.println(v.getIdMap());
             if (numbers == k){
                 v.setDeleted(true);
             }
@@ -120,19 +119,18 @@ public class ConnectionWithCsv {
 
 
            try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
-            carsPrintWrtiter.println(StructLabel.getCarLabelAsCsvString(structLabel));
-            deleteCar.forEach((i,c) -> carsPrintWrtiter.println(Car.getCarAsCsvString(c)));
+            carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
+            deleteCar.forEach((i,c) -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(c)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     private static void takeId() {
-        StructLabel structLabel;
         try (Scanner usersScanner = new Scanner(new FileInputStream(fileUsers))) {
-            structLabel = StructLabel.getUserLabelFromCsv(usersScanner.nextLine());
+            StructConversionObjectandCsv.getUserLabelFromCsv(usersScanner.nextLine());
             while (usersScanner.hasNext()) {
-                User newUser = User.convertUserCsvToString(usersScanner.nextLine());
+                User newUser = StructConversionObjectandCsv.convertUserCsvToString(usersScanner.nextLine());
                 if (Login.equals(newUser.getNick())) {
                     userId = newUser.getId();
                     break;

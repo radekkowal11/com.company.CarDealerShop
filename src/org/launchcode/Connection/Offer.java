@@ -32,9 +32,9 @@ public class Offer {
     public static void sortByPrice() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
-            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
-                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
+                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
                 cars.sort(newCar);
             }
@@ -49,9 +49,9 @@ public class Offer {
     public static void sortByYearProduction() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
-            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
-                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
+                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
                 Collections.sort(cars);
 
@@ -67,9 +67,9 @@ public class Offer {
     private static void getCarsCsv() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             cars.clear();
-            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
-                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
+                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
             }
         } catch (FileNotFoundException e) {
@@ -79,9 +79,9 @@ public class Offer {
 
     public static void MapCars() {
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            structLabel = StructLabel.getCarLabelFromCsv(carsScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
-                Car newCar = Car.getCarFromCsv(carsScanner.nextLine());
+                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                 carsMap.put(newCar.getIdMap(), newCar);
             }
         } catch (FileNotFoundException e) {
@@ -104,10 +104,10 @@ public class Offer {
 
         try (Scanner usersScanner = new Scanner(new FileInputStream(fileUsers))) {
             int plus = 0;
-            structLabel = StructLabel.getUserLabelFromCsv(usersScanner.nextLine());
+            structLabel = StructConversionObjectandCsv.getUserLabelFromCsv(usersScanner.nextLine());
             while (usersScanner.hasNext()) {
                 plus++;
-                User newUser = User.convertUserCsvToString(usersScanner.nextLine());
+                User newUser = StructConversionObjectandCsv.convertUserCsvToString(usersScanner.nextLine());
                 newId = newUser.getId() + plus;
                 if (p[0] == newUser.getId()) {
                     System.out.println(newUser);

@@ -15,11 +15,10 @@ import static src.org.launchcode.Interface.SelectionPanel.log;
 public class CheckPassword {
     public static void checkPassword(String a, String b) {
         List<User> users = new ArrayList<>();
-        StructLabel structLabel;
         try(Scanner LoginScanner = new Scanner(new FileInputStream(fileUsers))){
-            structLabel = StructLabel.getCarLabelFromCsv(LoginScanner.nextLine());
+            StructConversionObjectandCsv.getCarLabelFromCsv(LoginScanner.nextLine());
             while (LoginScanner.hasNext()) {
-                User newUser = User.convertUserCsvToString(LoginScanner.nextLine());
+                User newUser = StructConversionObjectandCsv.convertUserCsvToString(LoginScanner.nextLine());
                 newId = newUser.getId() + 1;
                 users.add(newUser);
             }

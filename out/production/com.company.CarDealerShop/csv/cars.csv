@@ -3,6 +3,6 @@ User_id,Brand,Model,Year_Production,Price,IsDeleted
 5,Porshe,Panamera,2011,190000.0,false
 10,Opel,Corsa,2011,12000.0,false
 11,Seat,Toledo,2001,5000.0,false
-1,Opel,Insignia,2014,35000.0,false
-1,Mazda,CX6,2015,75000.0,false
+1,Opel,Insignia,2014,35000.0,true
+1,Mazda,CX6,2015,75000.0,true
 9,Fiat,Punto,1999,4500.0,false

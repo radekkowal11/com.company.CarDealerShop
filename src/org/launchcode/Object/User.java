@@ -42,26 +42,6 @@ public class User {
         return password;
     }
 
-    public static User convertUserCsvToString(String csvString) {
-
-        String[] tab = csvString.split(SEPARATOR);
-
-            int id = Integer.parseInt(tab[0]);
-            String name = tab[1];
-            int age = Integer.parseInt(tab[2]);
-            String place = tab[3];
-            String nick = tab[4];
-            String pas = tab[5];
-
-        return new User(id,name,age,place,nick,pas);
-    }
-
-    public String addUserStringToCsv() {
-
-        return getId() + SEPARATOR + getName() + SEPARATOR + getAge()+ SEPARATOR + getLocalization() + SEPARATOR + getNick() +SEPARATOR + getPassword();
-
-    }
-
     @Override
     public String toString() {
         return "id: " + getId()+ ", name: " + name + ", age: " + age +
