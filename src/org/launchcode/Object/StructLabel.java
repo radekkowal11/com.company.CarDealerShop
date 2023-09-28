@@ -1,7 +1,5 @@
 package src.org.launchcode.Object;
 
-import static src.org.launchcode.Interface.Constance.SEPARATOR;
-
 public class StructLabel {
     String firstColumnName;
     String secondColumnName;

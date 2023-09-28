@@ -5,12 +5,13 @@ import java.util.Comparator;
 import static src.org.launchcode.Interface.Constance.*;
 
 public class Car implements Comparator<Car>,Comparable<Car> {
-    private final int id;
+    private int id;
     private final String brand;
     private final String model;
     private final int yearProduction;
     private final double price;
     public boolean isDeleted = false;
+
     public Car(int id, String brand, String model, int yearProduction, double price) {
         this.id = id;
         this.brand = brand;
@@ -30,7 +31,7 @@ public class Car implements Comparator<Car>,Comparable<Car> {
     }
 
     public int getIdMap() {
-        nextIdMap++;
+             nextIdMap++;
         return nextIdMap;
     }
     public int getId() {
@@ -52,6 +53,10 @@ public class Car implements Comparator<Car>,Comparable<Car> {
         return price;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public boolean isDeleted() {
         return isDeleted;
     }
@@ -59,6 +64,7 @@ public class Car implements Comparator<Car>,Comparable<Car> {
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
     }
+
     @Override
     public String toString() {
         return
@@ -75,3 +81,5 @@ public class Car implements Comparator<Car>,Comparable<Car> {
         return Integer.compare(this.yearProduction, car.yearProduction);
     }
 }
+
+

@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 import static src.org.launchcode.Interface.Constance.*;
+import static src.org.launchcode.Interface.Constance.cars;
 import static src.org.launchcode.Interface.TransactionPanel.textAddCar;
 import static src.org.launchcode.Interface.TransactionPanel.textAddUser;
 
@@ -26,14 +27,14 @@ public class ConnectionWithCsv {
                 users.add(newUser);
             }
 
-                String[] tab = textAddUser();
-                int b = Integer.parseInt(tab[1]);
+            String[] tab = textAddUser();
+            int b = Integer.parseInt(tab[1]);
 
             User user = new User(newId, tab[0], b, tab[2], tab[3], tab[4]);
 
             users.add(user);
 
-            writeUsers(users,structLabel);
+            writeUsers(users, structLabel);
 
         } catch (FileNotFoundException ex) {
             throw new RuntimeException(ex);
@@ -50,28 +51,32 @@ public class ConnectionWithCsv {
         }
     }
 
-    public static void addCars() {
+    public static void readCarsWithCsvToList() {
         takeId();
-        StructLabel structLabel;
         try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
             structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
             while (carsScanner.hasNext()) {
                 Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
                 cars.add(newCar);
             }
-
-            String[] tab = textAddCar();
-
-            int yearProduction = Integer.parseInt(tab[2]);
-            double price = Double.parseDouble(tab[3]);
-
-            cars.add(new Car(userId, tab[0], tab[1], yearProduction, price));
-
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void readCarsWithCsvToMap(){
+        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
+            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
+            while (carsScanner.hasNext()) {
+                newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
+                mapCars.put(newCar.getIdMap(), newCar);
+            }
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
+    }
+    public static void writeCarWithListToCsv(){
         try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
             carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
             cars.forEach(car -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(car)));
@@ -80,27 +85,38 @@ public class ConnectionWithCsv {
         }
     }
 
-
-    public static void deleteCar() {
-
-        takeId();
-        StructLabel structLabel;
-
-        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            Car newCar ;
-            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
-            while (carsScanner.hasNext()) {
-                    newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
-                    deleteCar.put(newCar.getIdMap(), newCar);
-
-            }
-
+    public static void writeCarWithMapToCsv(){
+        try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
+            carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
+            mapCars.forEach((i, c) -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(c)));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void addCar() {
+            cars.clear();
+            readCarsWithCsvToList();
+
+            String[] tab = textAddCar();
+
+            int yearProduction = Integer.parseInt(tab[2]);
+            double price = Double.parseDouble(tab[3]);
+
+            cars.add(new Car(userId, tab[0], tab[1], yearProduction, price));
+
+            writeCarWithListToCsv();
+
+    }
+
+
+    public static void deleteCar() {
+        cars.clear();
+        mapCars.clear();
+        readCarsWithCsvToList();
+        readCarsWithCsvToMap();
 
         System.out.println("Twoje samochody");
-        deleteCar.forEach((key,value) ->{
+        mapCars.forEach((key, value) -> {
 
             if (userId == value.getId())
                 System.out.println(key + " --> " + value);
@@ -110,20 +126,13 @@ public class ConnectionWithCsv {
         System.out.println("Podaj numer samochodu, który chcesz usunąć: ");
         int numbers = scanner.nextInt();
 
-        deleteCar.forEach((k,v) ->{
-            if (numbers == k){
+        mapCars.forEach((k, v) -> {
+            if (numbers == k) {
                 v.setDeleted(true);
             }
 
         });
-
-
-           try (PrintWriter carsPrintWrtiter = new PrintWriter(fileCars)) {
-            carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
-            deleteCar.forEach((i,c) -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(c)));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        writeCarWithMapToCsv();
     }
 
     private static void takeId() {
@@ -139,6 +148,19 @@ public class ConnectionWithCsv {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void buyCar(int choice) {
+            mapCars.clear();
+            readCarsWithCsvToMap();
+
+            mapCars.forEach((key,value) -> {
+                if (choice == key) {
+                    value.setId(newUserId);
+                }
+
+            });
+            writeCarWithMapToCsv();
     }
 
 }

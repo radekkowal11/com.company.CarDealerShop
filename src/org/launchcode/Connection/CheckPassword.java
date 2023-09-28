@@ -1,7 +1,6 @@
 package src.org.launchcode.Connection;
 
 import src.org.launchcode.Interface.SelectionPanel;
-import src.org.launchcode.Object.StructLabel;
 import src.org.launchcode.Object.User;
 
 import java.io.FileInputStream;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import static src.org.launchcode.Interface.Constance.*;
 import static src.org.launchcode.Interface.SelectionPanel.log;
+import static src.org.launchcode.Connection.ConnectionWithCsv.*;
 
 public class CheckPassword {
     public static void checkPassword(String a, String b) {
@@ -26,13 +26,17 @@ public class CheckPassword {
                 if (a.equals(user.getNick())){
                     if (b.equals(user.getPassword())){
                         Login = a;
+                        newUserId = user.getId();
+                        readCarsWithCsvToList();
+                        readCarsWithCsvToMap();
                         SelectionPanel.Panel();
+                    }else {
+                        System.out.println("Błędne dane logowania, spróbuj jeszcze raz");
+                        log();
                     }
-                }else {
-                    System.out.println("Błędne dane logowania, spróbuj jeszcze raz");
-                    log();
                 }
             }
+
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

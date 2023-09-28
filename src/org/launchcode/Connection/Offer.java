@@ -2,7 +2,6 @@ package src.org.launchcode.Connection;
 
 import src.org.launchcode.Object.Car;
 import src.org.launchcode.Object.User;
-import src.org.launchcode.Object.StructLabel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,95 +9,59 @@ import java.util.*;
 import static src.org.launchcode.Interface.Constance.*;
 
 public class Offer {
-    static Map<Integer, Car> carsMap = new HashMap<>();
-    static StructLabel structLabel;
-
     public static void findCars() {
-        getCarsCsv();
+
         for (Car car : cars) {
-            System.out.println(car);
+            if (!car.isDeleted)
+             System.out.println(car);
         }
     }
 
     public static void findBrand(String brand) {
-        getCarsCsv();
+
         for (Car car : cars) {
             if (car.getBrand().equals(brand)) {
-                System.out.println(car);
+                if (!car.isDeleted)
+                    System.out.println(car);
             }
         }
     }
 
     public static void sortByPrice() {
-        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            cars.clear();
-            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
-            while (carsScanner.hasNext()) {
-                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
-                cars.add(newCar);
-                cars.sort(newCar);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
+        cars.sort(newCar);
         for (Car car : cars) {
-            System.out.println(car);
+            if (!car.isDeleted)
+                System.out.println(car);
         }
     }
 
     public static void sortByYearProduction() {
-        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            cars.clear();
-            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
-            while (carsScanner.hasNext()) {
-                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
-                cars.add(newCar);
-                Collections.sort(cars);
 
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        Collections.sort(cars);
+
         for (Car car : cars) {
-            System.out.println(car);
-        }
-    }
-
-    private static void getCarsCsv() {
-        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            cars.clear();
-            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
-            while (carsScanner.hasNext()) {
-                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
-                cars.add(newCar);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            if (!car.isDeleted)
+                System.out.println(car);
         }
     }
 
     public static void MapCars() {
-        try (Scanner carsScanner = new Scanner(new FileInputStream(fileCars))) {
-            structLabel = StructConversionObjectandCsv.getCarLabelFromCsv(carsScanner.nextLine());
-            while (carsScanner.hasNext()) {
-                Car newCar = StructConversionObjectandCsv.getCarFromCsv(carsScanner.nextLine());
-                carsMap.put(newCar.getIdMap(), newCar);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
 
-        carsMap.forEach((key, value) -> {
-            if (key <= carsMap.size())
-                System.out.println(key + " --> " + value);
+        mapCars.forEach((key, value) -> {
+            if (key <= mapCars.size())
+                if (!value.isDeleted)
+                    System.out.println(key + " --> " + value);
         });
+        nextIdMap = 0;
     }
 
     public static void getOwner(int n) {
         final int[] p = new int[1];
-        carsMap.forEach((key, value) -> {
+        mapCars.forEach((key, value) -> {
             if (n == key) {
-                p[0] = value.getId();
+                if (!value.isDeleted)
+                 p[0] = value.getId();
             }
         });
 

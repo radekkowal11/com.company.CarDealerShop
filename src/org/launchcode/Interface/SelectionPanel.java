@@ -46,7 +46,7 @@ public class SelectionPanel {
                 break;
 
             switch (number) {
-                case 1 -> addCars();
+                case 1 -> addCar();
                 case 2 -> deleteCar();
                 case 3 -> {
                     System.out.println("Wybierz opcje wyszukiwania");
@@ -89,6 +89,7 @@ public class SelectionPanel {
                             }
                         case 5:
                             MapCars();
+                            System.out.println("3.Kup");
                             System.out.println("2.Pokaz właścicela");
                             System.out.println("1.Wyjście do strony głównej");
                             e = scanner.nextInt();
@@ -99,6 +100,17 @@ public class SelectionPanel {
                                 System.out.print("Podaj numer id samochodu: ");
                                 n = scanner.nextInt();
                                 getOwner(n);
+                                System.out.println("1.Wyjście do strony głównej");
+                                e = scanner.nextInt();
+                                if (e == 1) {
+                                    break;
+                                }
+                            }
+                            if (e == 3){
+                                System.out.print("Podaj numer id samochodu: ");
+                                int choice = scanner.nextInt();
+                                System.out.println();
+                                buyCar(choice);
                                 System.out.println("1.Wyjście do strony głównej");
                                 e = scanner.nextInt();
                                 if (e == 1) {

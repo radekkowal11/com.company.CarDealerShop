@@ -1,6 +1,5 @@
 package src.org.launchcode.Object;
 
-import static src.org.launchcode.Interface.Constance.*;
 public class User {
     private int id;
     private String name;
