@@ -59,11 +59,26 @@ public class SelectionPanel {
                     switch (n) {
                         case 1:
                             findCars();
+                            System.out.println("Natępna strona wciśnij 2");
+                            System.out.println("Poprzednia strona wciśnij 3");
+                            System.out.println("Wciśnij 0 aby wrócić do poprzedniego menu");
+                            int number2 = scanner.nextInt();
+
+                            while (number2!=0){
+                                findCars(number2);
+
+                                System.out.println("Natępna strona wciśnij 2");
+                                System.out.println("Poprzednia strona wciśnij 3");
+                                System.out.println("Wciśnij 0 aby wrócić do poprzedniego menu");
+                                number2 = scanner.nextInt();
+
+                            }
                             System.out.println("1.Wyjscie do strony głównej");
                             int e = scanner.nextInt();
                             if (e == 1) {
                                 break;
                             }
+
                         case 2:
                             System.out.println("Podaj marke samochodu");
                             String brand = scanner.next();
