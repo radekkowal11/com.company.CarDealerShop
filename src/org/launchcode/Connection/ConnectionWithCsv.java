@@ -19,7 +19,6 @@ public class ConnectionWithCsv {
     public static void addUser() {
         StructLabel structLabel;
         try (Scanner usersScanner = new Scanner(new FileInputStream(fileUsers))) {
-            List<User> users = new ArrayList<>();
             structLabel = StructConversionObjectandCsv.getUserLabelFromCsv(usersScanner.nextLine());
             while (usersScanner.hasNext()) {
                 User newUser = StructConversionObjectandCsv.convertUserCsvToString(usersScanner.nextLine());
@@ -28,6 +27,10 @@ public class ConnectionWithCsv {
             }
 
             String[] tab = textAddUser();
+            if(!isLetter(tab[0])){
+                System.out.println("wrong sign in name");
+                addUser();
+            }
             int b = Integer.parseInt(tab[1]);
 
             User user = new User(newId, tab[0], b, tab[2], tab[3], tab[4]);
@@ -37,9 +40,20 @@ public class ConnectionWithCsv {
             writeUsers(users, structLabel);
 
         } catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
+            System.out.println("File with users data not found. Check filepath and try again");
         }
 
+    }
+    public static boolean isLetter(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static void writeUsers(List<User> users, StructLabel structLabel) {
@@ -47,7 +61,7 @@ public class ConnectionWithCsv {
             usersPrintWrtiter.println(StructConversionObjectandCsv.getUserLabelAsCsvString(structLabel));
             users.forEach(u -> usersPrintWrtiter.println(StructConversionObjectandCsv.addUserStringToCsv(u)));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with users data not found. Check filepath and try again");
         }
     }
 
@@ -60,7 +74,7 @@ public class ConnectionWithCsv {
                 cars.add(newCar);
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with cars data not found. Check filepath and try again");
         }
     }
     public static void readCarsWithCsvToMap(){
@@ -72,7 +86,7 @@ public class ConnectionWithCsv {
             }
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with cars data not found. Check filepath and try again");
         }
 
     }
@@ -81,7 +95,7 @@ public class ConnectionWithCsv {
             carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
             cars.forEach(car -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(car)));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with cars data not found. Check filepath and try again");
         }
     }
 
@@ -90,7 +104,7 @@ public class ConnectionWithCsv {
             carsPrintWrtiter.println(StructConversionObjectandCsv.getCarLabelAsCsvString(structLabel));
             mapCars.forEach((i, c) -> carsPrintWrtiter.println(StructConversionObjectandCsv.getCarAsCsvString(c)));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with cars data not found. Check filepath and try again");
         }
     }
     public static void addCar() {
@@ -115,15 +129,15 @@ public class ConnectionWithCsv {
         readCarsWithCsvToList();
         readCarsWithCsvToMap();
 
-        System.out.println("Twoje samochody");
+        System.out.println("Your cars");
         mapCars.forEach((key, value) -> {
-
             if (userId == value.getId())
-                System.out.println(key + " --> " + value);
+                if(!value.isDeleted)
+                    System.out.println(key + " --> " + value);
 
         });
 
-        System.out.println("Podaj numer samochodu, który chcesz usunąć: ");
+        System.out.println("Write id cars to delete: ");
         int numbers = scanner.nextInt();
 
         mapCars.forEach((k, v) -> {
@@ -146,7 +160,7 @@ public class ConnectionWithCsv {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with users data not found. Check filepath and try again");
         }
     }
 

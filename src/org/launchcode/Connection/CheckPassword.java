@@ -14,7 +14,6 @@ import static src.org.launchcode.Connection.ConnectionWithCsv.*;
 
 public class CheckPassword {
     public static void checkPassword(String a, String b) {
-        List<User> users = new ArrayList<>();
         try(Scanner LoginScanner = new Scanner(new FileInputStream(fileUsers))){
             StructConversionObjectandCsv.getCarLabelFromCsv(LoginScanner.nextLine());
             while (LoginScanner.hasNext()) {
@@ -31,14 +30,17 @@ public class CheckPassword {
                         readCarsWithCsvToMap();
                         SelectionPanel.Panel();
                     }else {
-                        System.out.println("Błędne dane logowania, spróbuj jeszcze raz");
+                        System.out.println("Login error. Try again");
                         log();
                     }
+                }else {
+                    System.out.println("Login error. Try again");
+                    log();
                 }
             }
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File with users data not found. Check filepath and try again");
         }
     }
 }

@@ -1,4 +1,5 @@
 User_id,Brand,Model,Year_Production,Price,IsDeleted
+1,Seat,Ibiza,1999,3800.0,true
 7,Fiat,Punto,2001,3500.0,false
 1,Porshe,Panamera,2011,190000.0,false
 10,Opel,Corsa,2011,12000.0,false
@@ -8,3 +9,4 @@ User_id,Brand,Model,Year_Production,Price,IsDeleted
 9,Fiat,Punto,1999,4500.0,false
 1,BMW,E46,2000,8000.0,false
 10,Mazda,6,2017,40000.0,false
+1,Subaru,Impreza,2005,65000.0,true

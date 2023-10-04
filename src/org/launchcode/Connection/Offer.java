@@ -17,7 +17,7 @@ public class Offer {
     public static void findCars() {
 
         List<Car> page1 = pagination.getCurrentPageData();
-        System.out.println("Strona 1:");
+        System.out.println("Page 1:");
         for (Car car : page1) {
             if (!car.isDeleted)
                 System.out.println(car);
@@ -30,7 +30,7 @@ public class Offer {
         if (number == 2) {
             pagination.nextPage();
             currentPage = pagination.getCurrentPageData();
-            System.out.println("Aktaulna strona: " + pagination.getCurrentPage());
+            System.out.println("Current page: " + pagination.getCurrentPage());
             for (Car car : currentPage) {
                 System.out.println(car);
             }
@@ -38,7 +38,7 @@ public class Offer {
         if (number == 3) {
             pagination.previousPage();
             currentPage = pagination.getCurrentPageData();
-            System.out.println("Aktaulna strona: " + pagination.getCurrentPage());
+            System.out.println("Current page: " + pagination.getCurrentPage());
             for (Car car : currentPage) {
                 System.out.println(car);
             }
